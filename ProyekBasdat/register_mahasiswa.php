@@ -1,0 +1,88 @@
+<?php
+// File: register_mahasiswa.php
+
+// Koneksi ke database (gantilah sesuai konfigurasi Anda)
+include 'config.php';
+
+// Proses pendaftaran mahasiswa
+if (isset($_POST['tomboldaftar'])) {
+    // Ambil data dari form
+    $username = $_POST['username_mahasiswa'];
+    $password = password_hash($_POST['password_mahasiswa'], PASSWORD_DEFAULT);
+    $nama = $_POST['nama_mahasiswa'];
+    $email = $_POST['email_mahasiswa'];
+    $jurusan = $_POST['jurusan_mahasiswa'];
+
+    try {
+        $query = "INSERT INTO mahasiswa (id_mahasiswa, password, nama, email, jurusan) VALUES ('$username','$password','$nama','$email','$jurusan')";
+
+        $result = pg_query($db,$query);
+
+        if ($result) {
+            echo "Pendaftaran berhasil. Silahkan login dengan akun baru Anda.";
+        } else {
+            echo "Pendaftaran gagal. Silahkan coba lagi.";
+        }
+    } catch (Exception $e) {
+        echo "Terjadi kesalahan: " . $e->getMessage();
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrasi Mahasiswa - Liquid</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container main-container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mt-5">
+                    <div class="card-body">
+                        <h1 class="text-center mb-4">Registrasi Mahasiswa</h1>
+                        <form action="" method="post">
+                            <div class="form-group">
+                                <label for="username_mahasiswa">Username:</label>
+                                <input type="text" class="form-control" id="username_mahasiswa" name="username_mahasiswa" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password_mahasiswa">Password:</label>
+                                <input type="password" class="form-control" id="password_mahasiswa" name="password_mahasiswa" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="nama_mahasiswa">Nama:</label>
+                                <input type="text" class="form-control" id="nama_mahasiswa" name="nama_mahasiswa" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email_mahasiswa">Email:</label>
+                                <input type="email" class="form-control" id="email_mahasiswa" name="email_mahasiswa" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="jurusan_mahasiswa">Jurusan:</label>
+                                <input type="text" class="form-control" id="jurusan_mahasiswa" name="jurusan_mahasiswa" required>
+                            </div>
+                            <button type="submit" name="tomboldaftar" class="btn btn-primary btn-block">Daftar</button>
+                        </form>
+                        <p class="mt-3 text-center">Sudah punya akun? <a href="login_mahasiswa.php">Silakan login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

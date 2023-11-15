@@ -1,0 +1,33 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.main-container {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.inner-container {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Add any additional styling for the forms here */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    width: 100%;
+}
